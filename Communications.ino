@@ -100,6 +100,7 @@ void processIncominRequests() {
 // harvest init data
 String harvestInitData() {
 
+/*
   String initData ="";
 
   // door suspension info
@@ -119,7 +120,18 @@ String harvestInitData() {
   initData.concat("-"); 
   initData.concat(getDayThreshold());
   initData.concat("\n");  
-
+*/
+/*
+  String initData = "{";
+  initData.concat(concatJSON("Suspension", String(getDoorSuspensionTimeOut())) + ",");
+  initData.concat(concatJSON("nightfall", String(getNightfall())) + ",");
+  initData.concat(concatJSON("nightthreshold", String(getNightThreshold())) + ",");  
+  initData.concat(concatJSON("daybreak", String(getDaybreak())) + ",");
+  initData.concat(concatJSON("daythreshold", String(getDayThreshold())) + ",");
+ */
+  String keys[5];// = {"Suspension","nightfall","nightthreshold","daybreak","daythreshold"};
+  String values[5];// = {String(getDoorSuspensionTimeOut()),String(getNightfall()),String(getNightThreshold()),String(getDaybreak()),String(getDayThreshold())};
+  String initData;
   return initData;
 
 }
@@ -192,5 +204,13 @@ void sync(String syncData) {
 uint16_t extractToken(String input, char tag) {  
   String extract = input.substring(input.indexOf(tag)+1,input.lastIndexOf(tag));
   return extract.toInt();
+}
+
+
+// JSON concat
+String concatJSON (String key, String value) {
+  
+  return ("\"" + key + "\":\"" + value + "\"");
+  
 }
 
